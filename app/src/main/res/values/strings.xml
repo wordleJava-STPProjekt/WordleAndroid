@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">WordleAndroid</string>
+    <string name="title">Wordle</string>
+
+    <string name="start_button">Start Game</string>
+    <string name="help_button">Help</string>
+    <string name="back_button">Go Back</string>
+
+    <!--HelpActivity -->
+    <string name="help_title">Help</string>
+    <string name="how_to_play">
+        You have six (6) guesses to guess the word. Each guess must be a valid five (5) letter word. You submit your guess pressing the enter button on your keyboard. After each attempt, the colour of the boxes will change to show you how close you are to the correct answer.
+    </string>
+    <string name="examples">Examples</string>
+    <string name="example_first">The letter "W" is in the word and in the right position.</string>
+    <string name="example_second">The letter "I" is in the word, but in the wrong position.</string>
+    <string name="example_third">There is no letter "U" in the word.</string>
 </resources>
