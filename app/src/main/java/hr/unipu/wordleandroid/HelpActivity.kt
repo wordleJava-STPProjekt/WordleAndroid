@@ -12,7 +12,7 @@ class HelpActivity : AppCompatActivity() {
 
         val backButton = findViewById<Button>(R.id.back_button)
 
-        backButton.setOnClickListener{
+        backButton.setOnClickListener {
             intent = Intent(this, LandingActivity::class.java)
             startActivity(intent)
         }

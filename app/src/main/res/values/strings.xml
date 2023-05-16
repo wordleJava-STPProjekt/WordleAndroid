@@ -14,4 +14,8 @@
     <string name="example_first">The letter "W" is in the word and in the right position.</string>
     <string name="example_second">The letter "I" is in the word, but in the wrong position.</string>
     <string name="example_third">There is no letter "U" in the word.</string>
+
+    <!--ScoreActivity-->
+    <string name="new_game_button">New Game</string>
+    <string name="quit_button">Quit</string>
 </resources>

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LandingActivity"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".LandingActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,14 +12,21 @@
         android:gravity="center"
         android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-100dp"
+            android:layout_marginBottom="200dp"
+            android:src="@mipmap/icon" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="150dp"
             android:fontFamily="@font/spartan"
             android:text="@string/title"
-            android:textSize="48sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="48sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -33,8 +39,8 @@
                 android:layout_width="300dp"
                 android:layout_height="80dp"
                 android:backgroundTint="@color/primary"
-                android:text="@string/start_button"
                 android:fontFamily="@font/spartan"
+                android:text="@string/start_button"
                 android:textSize="32sp" />
 
             <com.google.android.material.button.MaterialButton
@@ -44,8 +50,8 @@
                 android:layout_height="80dp"
                 android:layout_marginTop="50dp"
                 android:backgroundTint="@color/primary"
-                android:text="@string/help_button"
                 android:fontFamily="@font/spartan"
+                android:text="@string/help_button"
                 android:textSize="32sp" />
 
         </LinearLayout>

@@ -14,12 +14,12 @@ class LandingActivity : AppCompatActivity() {
         val startButton = findViewById<Button>(R.id.start_button)
         val helpButton = findViewById<Button>(R.id.help_button)
 
-        startButton.setOnClickListener{
+        startButton.setOnClickListener {
             Log.i("Landing", "start")
             startActivity(Intent(this, GameActivity::class.java))
         }
 
-        helpButton.setOnClickListener{
+        helpButton.setOnClickListener {
             startActivity(Intent(this, HelpActivity::class.java))
         }
     }
