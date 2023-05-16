@@ -9,7 +9,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/title"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WordleAndroid" >
+        android:theme="@style/Theme.WordleAndroid">
+        <activity
+            android:name=".GameActivity"
+            android:exported="false" />
         <activity
             android:name=".HelpActivity"
             android:exported="false" />

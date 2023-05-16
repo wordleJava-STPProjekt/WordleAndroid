@@ -1,22 +1,12 @@
 package hr.unipu.wordleandroid
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 
 class LandingActivity : AppCompatActivity() {
-
-    fun openActivity(activityToOpen: String) {
-        when(activityToOpen) {
-            "HelpActivity" -> {
-                intent = Intent(this, HelpActivity::class.java)
-                startActivity(intent)
-            }
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_landing)
@@ -26,10 +16,11 @@ class LandingActivity : AppCompatActivity() {
 
         startButton.setOnClickListener{
             Log.i("Landing", "start")
+            startActivity(Intent(this, GameActivity::class.java))
         }
 
         helpButton.setOnClickListener{
-            openActivity("HelpActivity")
+            startActivity(Intent(this, HelpActivity::class.java))
         }
     }
 }
