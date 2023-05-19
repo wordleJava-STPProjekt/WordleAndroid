@@ -44,6 +44,10 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <com.google.android.material.divider.MaterialDivider
             android:layout_gravity="center"
             android:layout_marginVertical="50dp"
@@ -52,6 +56,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <com.google.android.material.textfield.TextInputLayout
+            app:placeholderText="inpute text"
+            android:layout_marginHorizontal="128dp"
+            android:gravity="center"
+            android:paddingHorizontal="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"/>
+
+            <include
+                layout="@layout/answer_grid"/>
+        </LinearLayout>
         <include
             android:id="@+id/keyboard_include"
             layout="@layout/keyboard"/>
