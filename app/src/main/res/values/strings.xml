@@ -18,4 +18,6 @@
     <!--ScoreActivity-->
     <string name="new_game_button">New Game</string>
     <string name="quit_button">Quit</string>
+    <string name="game_hint">Guess a word</string>
+    <string name="guess_button">Guess</string>
 </resources>
