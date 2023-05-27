@@ -2,6 +2,7 @@ package hr.unipu.wordleandroid
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -11,6 +12,7 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
+import kotlin.random.Random
 
 class GameActivity : AppCompatActivity() {
     lateinit var keyboardLayout: LinearLayout
@@ -65,6 +67,10 @@ class GameActivity : AppCompatActivity() {
         return winningWordsList
     }
 
+    private fun getRandomWord(wordsList: MutableList<String>): String {
+        return wordsList[Random.nextInt(wordsList.size)]
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
@@ -80,6 +86,7 @@ class GameActivity : AppCompatActivity() {
         val winningWordsList: MutableList<String> = initiateWinningWords()
         val dictionaryWords: MutableList<String> = initiateDictionaryWords()
 
+        val randomWord: String = getRandomWord(winningWordsList)
     }
 
     fun changeKeyColor(keyId: Int, colorId: Int) {
