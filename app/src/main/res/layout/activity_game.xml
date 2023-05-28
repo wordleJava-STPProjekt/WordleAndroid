@@ -82,7 +82,8 @@
                     android:textSize="16sp" />
             </LinearLayout>
 
-            <include layout="@layout/answer_grid" />
+            <include layout="@layout/answer_grid"
+                android:id="@+id/answer_grid"/>
         </LinearLayout>
 
         <include
