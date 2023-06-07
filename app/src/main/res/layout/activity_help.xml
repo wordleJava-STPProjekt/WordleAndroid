@@ -28,8 +28,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:orientation="vertical"
-            android:padding="10dp">
-
+            android:paddingHorizontal="10dp">
+            
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginVertical="50dp"
+            android:layout_marginVertical="25dp"
             app:dividerColor="@color/secondary"
             app:dividerThickness="2dp" />
 
@@ -118,7 +118,7 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginVertical="50dp"
+            android:layout_marginVertical="25dp"
             app:dividerColor="@color/secondary"
             app:dividerThickness="2dp" />
 
@@ -139,7 +139,7 @@
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:fontFamily="@font/spartan"
-            android:text="Scores"
+            android:text="@string/scores"
             android:textSize="32sp" />
 
     </LinearLayout>

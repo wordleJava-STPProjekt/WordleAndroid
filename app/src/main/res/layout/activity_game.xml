@@ -22,7 +22,7 @@
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Help Button"
+                android:contentDescription="@string/help_button_description"
                 android:src="@drawable/baseline_help_outline_32" />
 
             <TextView
@@ -32,14 +32,14 @@
                 android:gravity="center"
                 android:text="@string/title"
                 android:textColor="@color/black"
-                android:textSize="32dp" />
+                android:textSize="32sp" />
 
             <ImageButton
                 android:id="@+id/icon_restart"
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Restart Button"
+                android:contentDescription="@string/restart_button_description"
                 android:src="@drawable/baseline_restart_alt_32" />
 
         </LinearLayout>
@@ -70,7 +70,8 @@
                     android:fontFamily="@font/spartan"
                     android:hint="@string/game_hint"
                     android:inputType="text"
-                    android:paddingHorizontal="8dp" />
+                    android:paddingHorizontal="8dp"
+                    android:importantForAutofill="no" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/guess_button"
