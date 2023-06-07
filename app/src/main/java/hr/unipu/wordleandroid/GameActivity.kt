@@ -92,6 +92,11 @@ class GameActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        restartButton.setOnClickListener{
+           finish();
+           startActivity(intent)
+        }
+
         val winningWordsList: MutableList<String> = initiateWinningWords()
         val dictionaryWords: MutableList<String> = initiateDictionaryWords()
 
@@ -122,7 +127,7 @@ class GameActivity : AppCompatActivity() {
         column.setBackgroundColor(ResourcesCompat.getColor(resources, colorId, null))
     }
 
-    fun binarySearch(list: MutableList<String>, string: String): Boolean{
+    private fun binarySearch(list: MutableList<String>, string: String): Boolean{
         var low: Int = 0;
         var high: Int = list.size - 1;
 
@@ -135,5 +140,9 @@ class GameActivity : AppCompatActivity() {
             else high = mid - 1;
         }
         return false;
+    }
+
+    fun isValidGuess(guess: String, winningWordsList: MutableList<String>,dictionaryWords: MutableList<String>): Boolean{
+        return binarySearch(winningWordsList,guess) || binarySearch(dictionaryWords, guess);
     }
 }
