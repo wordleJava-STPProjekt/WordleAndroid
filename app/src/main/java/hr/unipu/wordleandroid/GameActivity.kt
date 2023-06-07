@@ -99,49 +99,6 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_game)
-        keyboardLayout = findViewById(R.id.keyboard_include)
-        helpButton = findViewById(R.id.icon_help)
-        restartButton = findViewById(R.id.icon_restart)
-        answerGrid = findViewById(R.id.answer_grid)
-        guessButton = findViewById(R.id.guess_button)
-        guessText = findViewById(R.id.guess_text)
-
-        val winningWordsList: MutableList<String> = initiateWinningWords()
-        val dictionaryWords: MutableList<String> = initiateDictionaryWords()
-
-        val randomWord: String = getRandomWord(winningWordsList)
-        Log.i("WINNINGWORD", randomWord)
-
-        for (i in 1..6) {
-            val answerRowId = resources.getIdentifier("answer_row$i", "id", packageName)
-            val answerRow: LinearLayout = answerGrid.findViewById(answerRowId)
-            answerRows += answerRow
-        }
-
-        helpButton.setOnClickListener {
-            intent = Intent(this, HelpActivity::class.java)
-            startActivity(intent)
-        }
-
-        restartButton.setOnClickListener {
-            finish()
-            startActivity(intent)
-        }
-
-        guessButton.setOnClickListener {
-            val guessedText = guessText.text
-            if (guessedText.length != 5) {
-                Toast.makeText(this, "Guessed word must be 5 letters.", Toast.LENGTH_SHORT).show()
-                guessText.text.clear()
-            } else {
-                updateKeyboardColours(word = guessedText.toString(), winningWord = randomWord)
-            }
-        }
-    }
-
     fun changeKeyColor(keyId: Int, colorId: Int) {
         keyboardLayout.findViewById<TextView>(keyId)
             .setBackgroundColor(ResourcesCompat.getColor(resources, colorId, null))
@@ -187,5 +144,48 @@ class GameActivity : AppCompatActivity() {
         dictionaryWords: MutableList<String>
     ): Boolean {
         return binarySearch(winningWordsList, guess) || binarySearch(dictionaryWords, guess)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_game)
+        keyboardLayout = findViewById(R.id.keyboard_include)
+        helpButton = findViewById(R.id.icon_help)
+        restartButton = findViewById(R.id.icon_restart)
+        answerGrid = findViewById(R.id.answer_grid)
+        guessButton = findViewById(R.id.guess_button)
+        guessText = findViewById(R.id.guess_text)
+
+        val winningWordsList: MutableList<String> = initiateWinningWords()
+        val dictionaryWords: MutableList<String> = initiateDictionaryWords()
+
+        val randomWord: String = getRandomWord(winningWordsList)
+        Log.i("WINNINGWORD", randomWord)
+
+        for (i in 1..6) {
+            val answerRowId = resources.getIdentifier("answer_row$i", "id", packageName)
+            val answerRow: LinearLayout = answerGrid.findViewById(answerRowId)
+            answerRows += answerRow
+        }
+
+        helpButton.setOnClickListener {
+            intent = Intent(this, HelpActivity::class.java)
+            startActivity(intent)
+        }
+
+        restartButton.setOnClickListener {
+            finish()
+            startActivity(intent)
+        }
+
+        guessButton.setOnClickListener {
+            val guessedText = guessText.text
+            if (guessedText.length != 5) {
+                Toast.makeText(this, "Guessed word must be 5 letters.", Toast.LENGTH_SHORT).show()
+                guessText.text.clear()
+            } else {
+                updateKeyboardColours(word = guessedText.toString(), winningWord = randomWord)
+            }
+        }
     }
 }
