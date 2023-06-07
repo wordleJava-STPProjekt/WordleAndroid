@@ -13,7 +13,7 @@ class HelpActivity : AppCompatActivity() {
         val backButton = findViewById<Button>(R.id.back_button)
 
         backButton.setOnClickListener {
-            intent = Intent(this, LandingActivity::class.java)
+            intent = Intent(this, GameActivity::class.java)
             startActivity(intent)
         }
     }

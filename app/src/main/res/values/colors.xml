@@ -11,4 +11,8 @@
     <color name="background">#fbfbf0</color>
     <color name="primary">#d09150</color>
     <color name="secondary">#508fd0</color>
+    <color name="error">#FF0000</color>
+    <color name="correct">#2DA800</color>
+    <color name="contains">#FFEB3B</color>
+    <color name="not_contain">#CE737373</color>
 </resources>

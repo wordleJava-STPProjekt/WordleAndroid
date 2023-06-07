@@ -1,11 +1,10 @@
 package hr.unipu.wordleandroid
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import java.io.BufferedReader
@@ -19,6 +18,8 @@ class GameActivity : AppCompatActivity() {
     lateinit var helpButton: ImageButton
     lateinit var restartButton: ImageButton
     lateinit var answerGrid: LinearLayout
+    lateinit var guessButton: Button
+    lateinit var guessText: EditText
     var answerRows = arrayOf<LinearLayout>()
 
     private fun initiateDictionaryWords(): MutableList<String> {
@@ -73,6 +74,31 @@ class GameActivity : AppCompatActivity() {
         return wordsList[Random.nextInt(wordsList.size)]
     }
 
+    @SuppressLint("DiscouragedApi")
+    private fun updateKeyboardColours(word: String, winningWord: String) {
+        for (i in 1..5) {
+            val currentWordChar: Char = word[i - 1].uppercaseChar()
+            val winningWordChar: Char = winningWord[i - 1].uppercaseChar()
+
+            if (currentWordChar == winningWordChar) {
+                changeKeyColor(
+                    keyId = resources.getIdentifier("key$currentWordChar", "id", packageName),
+                    colorId = R.color.correct
+                )
+            } else if (winningWord.contains(currentWordChar, ignoreCase = true)) {
+                changeKeyColor(
+                    keyId = resources.getIdentifier("key$currentWordChar", "id", packageName),
+                    colorId = R.color.contains
+                )
+            } else {
+                changeKeyColor(
+                    keyId = resources.getIdentifier("key$currentWordChar", "id", packageName),
+                    colorId = R.color.not_contain
+                )
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
@@ -80,6 +106,14 @@ class GameActivity : AppCompatActivity() {
         helpButton = findViewById(R.id.icon_help)
         restartButton = findViewById(R.id.icon_restart)
         answerGrid = findViewById(R.id.answer_grid)
+        guessButton = findViewById(R.id.guess_button)
+        guessText = findViewById(R.id.guess_text)
+
+        val winningWordsList: MutableList<String> = initiateWinningWords()
+        val dictionaryWords: MutableList<String> = initiateDictionaryWords()
+
+        val randomWord: String = getRandomWord(winningWordsList)
+        Log.i("WINNINGWORD", randomWord)
 
         for (i in 1..6) {
             val answerRowId = resources.getIdentifier("answer_row$i", "id", packageName)
@@ -92,15 +126,20 @@ class GameActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        restartButton.setOnClickListener{
-           finish();
-           startActivity(intent)
+        restartButton.setOnClickListener {
+            finish()
+            startActivity(intent)
         }
 
-        val winningWordsList: MutableList<String> = initiateWinningWords()
-        val dictionaryWords: MutableList<String> = initiateDictionaryWords()
-
-        val randomWord: String = getRandomWord(winningWordsList)
+        guessButton.setOnClickListener {
+            val guessedText = guessText.text
+            if (guessedText.length != 5) {
+                Toast.makeText(this, "Guessed word must be 5 letters.", Toast.LENGTH_SHORT).show()
+                guessText.text.clear()
+            } else {
+                updateKeyboardColours(word = guessedText.toString(), winningWord = randomWord)
+            }
+        }
     }
 
     fun changeKeyColor(keyId: Int, colorId: Int) {
@@ -127,22 +166,26 @@ class GameActivity : AppCompatActivity() {
         column.setBackgroundColor(ResourcesCompat.getColor(resources, colorId, null))
     }
 
-    private fun binarySearch(list: MutableList<String>, string: String): Boolean{
-        var low: Int = 0;
-        var high: Int = list.size - 1;
+    private fun binarySearch(list: MutableList<String>, string: String): Boolean {
+        var low = 0
+        var high: Int = list.size - 1
 
-        while (low <= high){
-            val mid: Int = low + (high - low) / 2;
-            val comparison: Int = string.compareTo(list[mid]);
+        while (low <= high) {
+            val mid: Int = low + (high - low) / 2
+            val comparison: Int = string.compareTo(list[mid])
 
-            if(comparison == 0) return true;
-            if(comparison > 0) low = mid + 1;
-            else high = mid - 1;
+            if (comparison == 0) return true
+            if (comparison > 0) low = mid + 1
+            else high = mid - 1
         }
-        return false;
+        return false
     }
 
-    fun isValidGuess(guess: String, winningWordsList: MutableList<String>,dictionaryWords: MutableList<String>): Boolean{
-        return binarySearch(winningWordsList,guess) || binarySearch(dictionaryWords, guess);
+    fun isValidGuess(
+        guess: String,
+        winningWordsList: MutableList<String>,
+        dictionaryWords: MutableList<String>
+    ): Boolean {
+        return binarySearch(winningWordsList, guess) || binarySearch(dictionaryWords, guess)
     }
 }
