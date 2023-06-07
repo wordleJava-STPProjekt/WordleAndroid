@@ -2,26 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/grid_background"
     android:orientation="vertical"
-    android:layout_gravity="center_horizontal">
+    android:padding="10dp">
 
     <include
         android:id="@+id/answer_row1"
-        layout="@layout/answer_row"/>
-     <include
+        layout="@layout/answer_row" />
+
+    <include
         android:id="@+id/answer_row2"
-        layout="@layout/answer_row"/>
-     <include
+        layout="@layout/answer_row" />
+
+    <include
         android:id="@+id/answer_row3"
-        layout="@layout/answer_row"/>
-     <include
+        layout="@layout/answer_row" />
+
+    <include
         android:id="@+id/answer_row4"
-        layout="@layout/answer_row"/>
-     <include
+        layout="@layout/answer_row" />
+
+    <include
         android:id="@+id/answer_row5"
-        layout="@layout/answer_row"/>
-     <include
+        layout="@layout/answer_row" />
+
+    <include
         android:id="@+id/answer_row6"
-        layout="@layout/answer_row"/>
+        layout="@layout/answer_row" />
 
 </LinearLayout>

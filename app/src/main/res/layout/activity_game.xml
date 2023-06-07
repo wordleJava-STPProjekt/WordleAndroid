@@ -60,18 +60,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/guess_text"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_layout"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/spartan"
-                    android:hint="@string/game_hint"
-                    android:inputType="text"
-                    android:paddingHorizontal="8dp"
-                    android:importantForAutofill="no" />
+                    app:counterEnabled="true"
+                    app:counterMaxLength="5"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/guess_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/background"
+                        android:fontFamily="@font/spartan"
+                        android:hint="@string/game_hint"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:textColor="@color/black" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/guess_button"
@@ -83,8 +95,10 @@
                     android:textSize="16sp" />
             </LinearLayout>
 
-            <include layout="@layout/answer_grid"
-                android:id="@+id/answer_grid"/>
+            <include
+                android:id="@+id/answer_grid"
+                layout="@layout/answer_grid" />
+
         </LinearLayout>
 
         <include

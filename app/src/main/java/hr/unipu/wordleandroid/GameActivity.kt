@@ -3,10 +3,13 @@ package hr.unipu.wordleandroid
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream
@@ -19,7 +22,8 @@ class GameActivity : AppCompatActivity() {
     lateinit var restartButton: ImageButton
     lateinit var answerGrid: LinearLayout
     lateinit var guessButton: Button
-    lateinit var guessText: EditText
+    lateinit var inputLayout: TextInputLayout
+    lateinit var guessText: TextInputEditText
     var answerRows = arrayOf<LinearLayout>()
 
     private fun initiateDictionaryWords(): MutableList<String> {
@@ -76,7 +80,6 @@ class GameActivity : AppCompatActivity() {
 
     @SuppressLint("DiscouragedApi")
     private fun guessWord(word: String, winningWord: String, currentRow: Int) {
-
         for (i in 1..5) {
             val currentWordChar: Char = word[i - 1].uppercaseChar()
             val winningWordChar: Char = winningWord[i - 1].uppercaseChar()
@@ -124,7 +127,7 @@ class GameActivity : AppCompatActivity() {
                 changeCellColor(
                     rowPosition = currentRow,
                     textViewId = resources.getIdentifier("answer_col$i", "id", packageName),
-                    colorId = R.color.not_contain
+                    colorId = R.color.grid_cell
                 )
             }
         }
@@ -139,17 +142,12 @@ class GameActivity : AppCompatActivity() {
         return answerRows[rowPosition - 1].findViewById(textViewId)
     }
 
-    fun changeCellText(rowPosition: Int, textViewId: Int, text: String) {
-        // changing text
-        // changeCellText(2,R.id.answer_col3, "Q")
+    private fun changeCellText(rowPosition: Int, textViewId: Int, text: String) {
         val column: TextView = getCellReference(rowPosition, textViewId)
         column.text = text
     }
 
-    fun changeCellColor(rowPosition: Int, textViewId: Int, colorId: Int) {
-        // changing colors
-        // changeCellColor(2, R.id.answer_col3, R.color.purple_200)
-        // changeKeyColor(R.id.keyB, R.color.black)
+    private fun changeCellColor(rowPosition: Int, textViewId: Int, colorId: Int) {
         val column: TextView = getCellReference(rowPosition, textViewId)
         column.setBackgroundColor(ResourcesCompat.getColor(resources, colorId, null))
     }
@@ -169,12 +167,28 @@ class GameActivity : AppCompatActivity() {
         return false
     }
 
-    fun isValidGuess(
+    private fun isValidGuess(
         guess: String,
         winningWordsList: MutableList<String>,
         dictionaryWords: MutableList<String>
     ): Boolean {
         return binarySearch(winningWordsList, guess) || binarySearch(dictionaryWords, guess)
+    }
+
+    private fun hideKeyboard() {
+        val view: View? = this.currentFocus
+
+        if (view != null) {
+            val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
+
+    private fun openScoreActivity(winningWord: String, isWon: Boolean) {
+        intent = Intent(this, ScoreActivity::class.java)
+        intent.putExtra("winningWord", winningWord)
+        intent.putExtra("isWon", isWon)
+        startActivity(intent)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -185,6 +199,7 @@ class GameActivity : AppCompatActivity() {
         restartButton = findViewById(R.id.icon_restart)
         answerGrid = findViewById(R.id.answer_grid)
         guessButton = findViewById(R.id.guess_button)
+        inputLayout = findViewById(R.id.input_layout)
         guessText = findViewById(R.id.guess_text)
 
         var CURRENT_ROW = 1
@@ -193,7 +208,6 @@ class GameActivity : AppCompatActivity() {
         val dictionaryWords: MutableList<String> = initiateDictionaryWords()
 
         val winningWord: String = getRandomWord(winningWordsList)
-        Log.i("WINNINGWORD", winningWord)
 
         for (i in 1..6) {
             val answerRowId = resources.getIdentifier("answer_row$i", "id", packageName)
@@ -214,23 +228,19 @@ class GameActivity : AppCompatActivity() {
         guessButton.setOnClickListener {
             val guessedText = guessText.text
 
-            if (guessedText.length != 5 || !isValidGuess(
+            if (guessedText?.length != 5 || !isValidGuess(
                     guess = guessedText.toString(),
                     winningWordsList = winningWordsList,
                     dictionaryWords = dictionaryWords
                 )
             ) {
-                Toast.makeText(
-                    this,
-                    "Guessed word is either invalid or not 5 letters.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                inputLayout.error = getString(R.string.input_error)
+                hideKeyboard()
+                guessText.text?.clear()
             } else {
+                inputLayout.error = null
                 if (guessedText.toString().lowercase() == winningWord.lowercase()) {
-                    intent = Intent(this, ScoreActivity::class.java)
-                    intent.putExtra("winningWord", winningWord)
-                    intent.putExtra("isWon", true)
-                    startActivity(intent)
+                    openScoreActivity(winningWord, true)
                 } else {
                     guessWord(
                         word = guessedText.toString(),
@@ -238,15 +248,13 @@ class GameActivity : AppCompatActivity() {
                         currentRow = CURRENT_ROW
                     )
                     if (CURRENT_ROW == 6) {
-                        intent = Intent(this, ScoreActivity::class.java)
-                        intent.putExtra("winningWord", winningWord)
-                        intent.putExtra("isWon", false)
-                        startActivity(intent)
+                        openScoreActivity(winningWord, false)
                     }
                     CURRENT_ROW++
                 }
+                guessText.text?.clear()
             }
-            guessText.text.clear()
+            hideKeyboard()
         }
     }
 }

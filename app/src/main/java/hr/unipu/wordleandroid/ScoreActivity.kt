@@ -20,9 +20,9 @@ class ScoreActivity : AppCompatActivity() {
         val isWon = intent.getBooleanExtra("isWon", false)
 
         if (isWon) {
-            scoreText.text = "Congratulations \n You won! \n The correct word was $winningWord"
+            scoreText.text = "Congratulations! \n\n You won! \n\n  The correct word was $winningWord"
         } else {
-            scoreText.text = "Shame \n You lost! \n The correct word was $winningWord"
+            scoreText.text = "Shame \n\n You lost! \n\n The correct word was $winningWord"
         }
 
         val newGameButton = findViewById<Button>(R.id.new_game_button)
