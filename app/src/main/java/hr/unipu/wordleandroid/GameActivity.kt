@@ -75,7 +75,8 @@ class GameActivity : AppCompatActivity() {
     }
 
     @SuppressLint("DiscouragedApi")
-    private fun updateKeyboardColours(word: String, winningWord: String) {
+    private fun guessWord(word: String, winningWord: String, currentRow: Int) {
+
         for (i in 1..5) {
             val currentWordChar: Char = word[i - 1].uppercaseChar()
             val winningWordChar: Char = winningWord[i - 1].uppercaseChar()
@@ -85,9 +86,29 @@ class GameActivity : AppCompatActivity() {
                     keyId = resources.getIdentifier("key$currentWordChar", "id", packageName),
                     colorId = R.color.correct
                 )
+                changeCellText(
+                    rowPosition = currentRow,
+                    textViewId = resources.getIdentifier("answer_col$i", "id", packageName),
+                    text = currentWordChar.toString()
+                )
+                changeCellColor(
+                    rowPosition = currentRow,
+                    textViewId = resources.getIdentifier("answer_col$i", "id", packageName),
+                    colorId = R.color.correct
+                )
             } else if (winningWord.contains(currentWordChar, ignoreCase = true)) {
                 changeKeyColor(
                     keyId = resources.getIdentifier("key$currentWordChar", "id", packageName),
+                    colorId = R.color.contains
+                )
+                changeCellText(
+                    rowPosition = currentRow,
+                    textViewId = resources.getIdentifier("answer_col$i", "id", packageName),
+                    text = currentWordChar.toString()
+                )
+                changeCellColor(
+                    rowPosition = currentRow,
+                    textViewId = resources.getIdentifier("answer_col$i", "id", packageName),
                     colorId = R.color.contains
                 )
             } else {
@@ -95,11 +116,21 @@ class GameActivity : AppCompatActivity() {
                     keyId = resources.getIdentifier("key$currentWordChar", "id", packageName),
                     colorId = R.color.not_contain
                 )
+                changeCellText(
+                    rowPosition = currentRow,
+                    textViewId = resources.getIdentifier("answer_col$i", "id", packageName),
+                    text = currentWordChar.toString()
+                )
+                changeCellColor(
+                    rowPosition = currentRow,
+                    textViewId = resources.getIdentifier("answer_col$i", "id", packageName),
+                    colorId = R.color.not_contain
+                )
             }
         }
     }
 
-    fun changeKeyColor(keyId: Int, colorId: Int) {
+    private fun changeKeyColor(keyId: Int, colorId: Int) {
         keyboardLayout.findViewById<TextView>(keyId)
             .setBackgroundColor(ResourcesCompat.getColor(resources, colorId, null))
     }
@@ -110,15 +141,15 @@ class GameActivity : AppCompatActivity() {
 
     fun changeCellText(rowPosition: Int, textViewId: Int, text: String) {
         // changing text
-//        changeCellText(2,R.id.answer_col3, "Q")
+        // changeCellText(2,R.id.answer_col3, "Q")
         val column: TextView = getCellReference(rowPosition, textViewId)
         column.text = text
     }
 
     fun changeCellColor(rowPosition: Int, textViewId: Int, colorId: Int) {
         // changing colors
-//        changeCellColor(2, R.id.answer_col3, R.color.purple_200)
-//        changeKeyColor(R.id.keyB, R.color.black)
+        // changeCellColor(2, R.id.answer_col3, R.color.purple_200)
+        // changeKeyColor(R.id.keyB, R.color.black)
         val column: TextView = getCellReference(rowPosition, textViewId)
         column.setBackgroundColor(ResourcesCompat.getColor(resources, colorId, null))
     }
@@ -156,11 +187,13 @@ class GameActivity : AppCompatActivity() {
         guessButton = findViewById(R.id.guess_button)
         guessText = findViewById(R.id.guess_text)
 
+        var CURRENT_ROW = 1
+
         val winningWordsList: MutableList<String> = initiateWinningWords()
         val dictionaryWords: MutableList<String> = initiateDictionaryWords()
 
-        val randomWord: String = getRandomWord(winningWordsList)
-        Log.i("WINNINGWORD", randomWord)
+        val winningWord: String = getRandomWord(winningWordsList)
+        Log.i("WINNINGWORD", winningWord)
 
         for (i in 1..6) {
             val answerRowId = resources.getIdentifier("answer_row$i", "id", packageName)
@@ -180,12 +213,40 @@ class GameActivity : AppCompatActivity() {
 
         guessButton.setOnClickListener {
             val guessedText = guessText.text
-            if (guessedText.length != 5) {
-                Toast.makeText(this, "Guessed word must be 5 letters.", Toast.LENGTH_SHORT).show()
-                guessText.text.clear()
+
+            if (guessedText.length != 5 || !isValidGuess(
+                    guess = guessedText.toString(),
+                    winningWordsList = winningWordsList,
+                    dictionaryWords = dictionaryWords
+                )
+            ) {
+                Toast.makeText(
+                    this,
+                    "Guessed word is either invalid or not 5 letters.",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
-                updateKeyboardColours(word = guessedText.toString(), winningWord = randomWord)
+                if (guessedText.toString().lowercase() == winningWord.lowercase()) {
+                    intent = Intent(this, ScoreActivity::class.java)
+                    intent.putExtra("winningWord", winningWord)
+                    intent.putExtra("isWon", true)
+                    startActivity(intent)
+                } else {
+                    guessWord(
+                        word = guessedText.toString(),
+                        winningWord = winningWord,
+                        currentRow = CURRENT_ROW
+                    )
+                    if (CURRENT_ROW == 6) {
+                        intent = Intent(this, ScoreActivity::class.java)
+                        intent.putExtra("winningWord", winningWord)
+                        intent.putExtra("isWon", false)
+                        startActivity(intent)
+                    }
+                    CURRENT_ROW++
+                }
             }
+            guessText.text.clear()
         }
     }
 }

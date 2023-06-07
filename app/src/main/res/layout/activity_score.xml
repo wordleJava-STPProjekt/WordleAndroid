@@ -18,7 +18,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="350dp"
             android:fontFamily="@font/spartan"
-            android:text="Placeholder text \n You won/lost! \n The correct word is XXXXX"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="18sp" />
