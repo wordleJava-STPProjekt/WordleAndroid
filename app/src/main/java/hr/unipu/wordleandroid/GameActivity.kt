@@ -121,4 +121,19 @@ class GameActivity : AppCompatActivity() {
         val column: TextView = getCellReference(rowPosition, textViewId)
         column.setBackgroundColor(ResourcesCompat.getColor(resources, colorId, null))
     }
+
+    fun binarySearch(list: MutableList<String>, string: String): Boolean{
+        var low: Int = 0;
+        var high: Int = list.size - 1;
+
+        while (low <= high){
+            val mid: Int = low + (high - low) / 2;
+            val comparison: Int = string.compareTo(list[mid]);
+
+            if(comparison == 0) return true;
+            if(comparison > 0) low = mid + 1;
+            else high = mid - 1;
+        }
+        return false;
+    }
 }
