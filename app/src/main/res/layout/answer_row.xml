@@ -9,55 +9,55 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_margin="4dp"
-        android:background="@color/secondary"
+        android:background="@color/grid_cell"
+        android:fontFamily="@font/spartan"
         android:gravity="center"
-        android:text=""
-        android:textColor="@color/background"
-        android:textSize="48sp" />
+        android:textColor="@color/black"
+        android:textSize="32sp" />
 
     <TextView
         android:id="@+id/answer_col2"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_margin="4dp"
-        android:background="@color/secondary"
+        android:background="@color/grid_cell"
+        android:fontFamily="@font/spartan"
         android:gravity="center"
-        android:text=""
-        android:textColor="@color/background"
-        android:textSize="48sp" />
+        android:textColor="@color/black"
+        android:textSize="32sp" />
 
     <TextView
         android:id="@+id/answer_col3"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_margin="4dp"
-        android:background="@color/secondary"
+        android:background="@color/grid_cell"
+        android:fontFamily="@font/spartan"
         android:gravity="center"
-        android:text=""
-        android:textColor="@color/background"
-        android:textSize="48sp" />
+        android:textColor="@color/black"
+        android:textSize="32sp" />
 
     <TextView
         android:id="@+id/answer_col4"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_margin="4dp"
-        android:background="@color/secondary"
+        android:background="@color/grid_cell"
+        android:fontFamily="@font/spartan"
         android:gravity="center"
-        android:text=""
-        android:textColor="@color/background"
-        android:textSize="48sp" />
+        android:textColor="@color/black"
+        android:textSize="32sp" />
 
     <TextView
         android:id="@+id/answer_col5"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_margin="4dp"
-        android:background="@color/secondary"
+        android:background="@color/grid_cell"
+        android:fontFamily="@font/spartan"
         android:gravity="center"
-        android:text=""
-        android:textColor="@color/background"
-        android:textSize="48sp" />
+        android:textColor="@color/black"
+        android:textSize="32sp" />
 
 
 </LinearLayout>

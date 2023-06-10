@@ -1,6 +1,7 @@
 <resources>
     <string name="title">Wordle</string>
 
+    <!--LandingActivity-->
     <string name="start_button">Start Game</string>
     <string name="help_button">Help</string>
     <string name="back_button">Go Back</string>
@@ -15,11 +16,19 @@
     <string name="example_second">The letter "I" is in the word, but in the wrong position.</string>
     <string name="example_third">There is no letter "U" in the word.</string>
 
+    <!--GameActivity-->
+    <string name="restart_button_description">Restart Button</string>
+    <string name="help_button_description">Help Button</string>
+    <string name="scores">Scores</string>
+    <string name="input_error">Invalid input</string>
+
     <!--ScoreActivity-->
     <string name="new_game_button">New Game</string>
     <string name="quit_button">Quit</string>
     <string name="game_hint">Guess a word</string>
     <string name="guess_button">Guess</string>
+
+    <!--Keyboard-->
     <string name="q">Q</string>
     <string name="w">W</string>
     <string name="e">E</string>
@@ -46,7 +55,5 @@
     <string name="b">B</string>
     <string name="n">N</string>
     <string name="m">M</string>
-    <string name="restart_button_description">Restart Button</string>
-    <string name="help_button_description">Help Button</string>
-    <string name="scores">Scores</string>
+
 </resources>

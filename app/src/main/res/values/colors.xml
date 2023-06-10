@@ -9,10 +9,13 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="background">#fbfbf0</color>
+    <color name="grid_cell">#BFC8965A</color>
+    <color name="grid_background">#80D09150</color>
     <color name="primary">#d09150</color>
     <color name="secondary">#508fd0</color>
     <color name="error">#FF0000</color>
-    <color name="correct">#2DA800</color>
-    <color name="contains">#FFEB3B</color>
-    <color name="not_contain">#CE737373</color>
+    <color name="correct">#D82B9C01</color>
+    <color name="contains">#DAFFC107</color>
+    <color name="not_contain">#D8A5A5A5</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>
