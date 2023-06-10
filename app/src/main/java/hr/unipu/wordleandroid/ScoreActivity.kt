@@ -24,18 +24,7 @@ class ScoreActivity : AppCompatActivity() {
         scoreText = findViewById(R.id.score_text)
         viewConfetti = findViewById(R.id.konfettiView)
 
-        viewConfetti.start(
-            Party(
-                speed = 0f,
-                maxSpeed = 30f,
-                damping = 0.9f,
-                spread = 360,
-                colors = listOf(0xfce18a, 0x8afce1, 0xff726d, 0xf4306d, 0xb48def),
-                shapes = listOf(Shape.Circle),
-                position = Position.Relative(0.5, 0.3),
-                emitter = Emitter(duration = 100, TimeUnit.MILLISECONDS).max(100)
-            )
-        )
+
 
         val winningWord = intent.getStringExtra("winningWord")
         val isWon = intent.getBooleanExtra("isWon", false)
@@ -43,6 +32,18 @@ class ScoreActivity : AppCompatActivity() {
         if (isWon) {
             scoreText.text =
                 "Congratulations! \n\n You won! \n\n  The correct word was \n ${winningWord?.uppercase()}"
+            viewConfetti.start(
+                Party(
+                    speed = 0f,
+                    maxSpeed = 30f,
+                    damping = 0.9f,
+                    spread = 360,
+                    colors = listOf(0xfce18a, 0x8afce1, 0xff726d, 0xf4306d, 0xb48def),
+                    shapes = listOf(Shape.Circle),
+                    position = Position.Relative(0.5, 0.3),
+                    emitter = Emitter(duration = 100, TimeUnit.MILLISECONDS).max(100)
+                )
+            )
         } else {
             scoreText.text = "Shame \n\n You lost! \n\n The correct word was $winningWord"
         }
