@@ -42,7 +42,7 @@ class ScoreActivity : AppCompatActivity() {
 
         if (isWon) {
             scoreText.text =
-                "Congratulations! \n\n You won! \n\n  The correct word was $winningWord"
+                "Congratulations! \n\n You won! \n\n  The correct word was \n ${winningWord?.uppercase()}"
         } else {
             scoreText.text = "Shame \n\n You lost! \n\n The correct word was $winningWord"
         }

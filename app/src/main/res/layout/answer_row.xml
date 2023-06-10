@@ -6,8 +6,8 @@
 
     <TextView
         android:id="@+id/answer_col1"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
         android:layout_margin="4dp"
         android:background="@color/grid_cell"
         android:fontFamily="@font/spartan"
@@ -17,8 +17,8 @@
 
     <TextView
         android:id="@+id/answer_col2"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
         android:layout_margin="4dp"
         android:background="@color/grid_cell"
         android:fontFamily="@font/spartan"
@@ -28,8 +28,8 @@
 
     <TextView
         android:id="@+id/answer_col3"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
         android:layout_margin="4dp"
         android:background="@color/grid_cell"
         android:fontFamily="@font/spartan"
@@ -39,8 +39,8 @@
 
     <TextView
         android:id="@+id/answer_col4"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
         android:layout_margin="4dp"
         android:background="@color/grid_cell"
         android:fontFamily="@font/spartan"
@@ -50,8 +50,8 @@
 
     <TextView
         android:id="@+id/answer_col5"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
         android:layout_margin="4dp"
         android:background="@color/grid_cell"
         android:fontFamily="@font/spartan"
