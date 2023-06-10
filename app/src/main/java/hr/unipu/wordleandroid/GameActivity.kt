@@ -17,14 +17,15 @@ import java.io.InputStreamReader
 import kotlin.random.Random
 
 class GameActivity : AppCompatActivity() {
-    lateinit var keyboardLayout: LinearLayout
-    lateinit var helpButton: ImageButton
-    lateinit var restartButton: ImageButton
-    lateinit var answerGrid: LinearLayout
-    lateinit var guessButton: Button
-    lateinit var inputLayout: TextInputLayout
-    lateinit var guessText: TextInputEditText
-    var answerRows = arrayOf<LinearLayout>()
+    private lateinit var keyboardLayout: LinearLayout
+    private lateinit var helpButton: ImageButton
+    private lateinit var restartButton: ImageButton
+    private lateinit var answerGrid: LinearLayout
+    private lateinit var guessButton: Button
+    private lateinit var inputLayout: TextInputLayout
+    private lateinit var guessText: TextInputEditText
+    private var answerRows = arrayOf<LinearLayout>()
+
 
     private fun initiateDictionaryWords(): MutableList<String> {
         val dictionaryWordsList: MutableList<String> = mutableListOf()
@@ -87,7 +88,7 @@ class GameActivity : AppCompatActivity() {
             if (currentWordChar == winningWordChar) {
                 changeKeyColor(
                     keyId = resources.getIdentifier("key$currentWordChar", "id", packageName),
-                    colorId = R.color.correct
+                    colorId = R.color.correct,
                 )
                 changeCellText(
                     rowPosition = currentRow,
@@ -102,7 +103,7 @@ class GameActivity : AppCompatActivity() {
             } else if (winningWord.contains(currentWordChar, ignoreCase = true)) {
                 changeKeyColor(
                     keyId = resources.getIdentifier("key$currentWordChar", "id", packageName),
-                    colorId = R.color.contains
+                    colorId = R.color.contains,
                 )
                 changeCellText(
                     rowPosition = currentRow,
@@ -117,7 +118,7 @@ class GameActivity : AppCompatActivity() {
             } else {
                 changeKeyColor(
                     keyId = resources.getIdentifier("key$currentWordChar", "id", packageName),
-                    colorId = R.color.not_contain
+                    colorId = R.color.not_contain,
                 )
                 changeCellText(
                     rowPosition = currentRow,
@@ -245,7 +246,7 @@ class GameActivity : AppCompatActivity() {
                     guessWord(
                         word = guessedText.toString(),
                         winningWord = winningWord,
-                        currentRow = CURRENT_ROW
+                        currentRow = CURRENT_ROW,
                     )
                     if (CURRENT_ROW == 6) {
                         openScoreActivity(winningWord, false)
